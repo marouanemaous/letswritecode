@@ -1,28 +1,26 @@
-<#
-.SYNOPSIS
-    Interactively installs a scheduled task that purges old files from a folder,
-    on the local machine and/or on multiple remote servers.
-
-.DESCRIPTION
-    Prompts for:
-      - the target servers (comma separated, or the path to a .txt file with one per line)
-      - optional alternate credentials for the remote servers
-      - the folder to clean (a local path as seen on each target server)
-      - the file age (in days) after which files are deleted
-      - how often (every N days) the task runs
-      - the time of day the task runs
-      - whether to include subfolders and remove empty folders
-      - the scheduled task name
-
-    It first previews every server (folder exists, how many files would be deleted),
-    asks for confirmation, then on each server writes a small purge script to
-    C:\ProgramData\FolderPurge and registers a scheduled task that runs it as SYSTEM.
-    Each run is logged next to the purge script on that server.
-
-    Remote servers are reached with PowerShell remoting (WinRM), so it must be enabled
-    on them (Enable-PSRemoting) and the account used must be an administrator there.
-    Targets need Windows Server 2012 / Windows 8 or later (ScheduledTasks module).
-#>
+# .SYNOPSIS
+#     Interactively installs a scheduled task that purges old files from a folder,
+#     on the local machine and/or on multiple remote servers.
+#
+# .DESCRIPTION
+#     Prompts for:
+#       - the target servers (comma separated, or the path to a .txt file with one per line)
+#       - optional alternate credentials for the remote servers
+#       - the folder to clean (a local path as seen on each target server)
+#       - the file age (in days) after which files are deleted
+#       - how often (every N days) the task runs
+#       - the time of day the task runs
+#       - whether to include subfolders and remove empty folders
+#       - the scheduled task name
+#
+#     It first previews every server (folder exists, how many files would be deleted),
+#     asks for confirmation, then on each server writes a small purge script to
+#     C:\ProgramData\FolderPurge and registers a scheduled task that runs it as SYSTEM.
+#     Each run is logged next to the purge script on that server.
+#
+#     Remote servers are reached with PowerShell remoting (WinRM), so it must be enabled
+#     on them (Enable-PSRemoting) and the account used must be an administrator there.
+#     Targets need Windows Server 2012 / Windows 8 or later (ScheduledTasks module).
 
 $ErrorActionPreference = 'Stop'
 
