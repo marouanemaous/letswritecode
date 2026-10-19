@@ -76,7 +76,7 @@ $olderThanDays = Read-PositiveInt "Delete files older than how many days?" 30
 $intervalDays  = Read-PositiveInt "Run the task every how many days?" 1
 
 while ($true) {
-    $timeInput = Read-Host "Time of day to run (HH:mm, 24h)"
+    $timeInput = Read-Host "Time of day to run (HH:mm, 24h) [02:00]"
     if ([string]::IsNullOrWhiteSpace($timeInput)) { $timeInput = '02:00' }
     $startTime = [datetime]::MinValue
     if ([datetime]::TryParseExact($timeInput.Trim(), 'HH:mm', $null, 'None', [ref]$startTime)) { break }
